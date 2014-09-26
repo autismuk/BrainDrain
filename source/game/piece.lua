@@ -25,12 +25,19 @@ function Piece:constructor(info)
 		local scaleReqd = math.min(0.5,maxSize / text.width)
 		text.xScale, text.yScale = scaleReqd,scaleReqd
 	end
+	if self.m_info.isVerticallyMirrored then 
+		text.yScale = -text.yScale 
+	end
+	if self.m_info.isHorizontallyMirrored then 
+		text.xScale = -text.xScale 
+	end
 	self.m_group.alpha = 0
+	self:changeBackground()
 end 
 
 function Piece:destructor()
 	self.m_group:removeSelf()
-	self.m_info = nil self.m_group = nil
+	self.m_info = nil self.m_group = nil self.m_piece = nil
 end
 
 function Piece:move(x,y)
@@ -39,5 +46,18 @@ function Piece:move(x,y)
 	x = (x - offset) * (self.m_info.gridPixelSize + self.m_info.margin) + self.m_info.centre.x
 	y = (y - offset) * (self.m_info.gridPixelSize + self.m_info.margin) + self.m_info.centre.y
 	transition.cancel(self.m_group)
-	transition.to(self.m_group, { time = 1500, alpha = 1, x = x, y = y, onComplete = function() end })
+	self.m_inMotion = true
+	transition.to(self.m_group, { time = 1500, alpha = 1, x = x, y = y, onComplete = function() self.m_inMotion = false end })
 end
+
+Piece.backgroundList = { 
+	{ 0,0,0 }, { 0,0,1 }, { 0,0.5,0 }, { 1,0,0 }, { 1,0.5,0 }, { 0.5,0.5,0.5 }, {160/255,82/255,45/255}
+}
+
+function Piece:changeBackground()
+	local n = math.random(#Piece.backgroundList)
+	local col = Piece.backgroundList[n]
+	self.m_piece:setFillColor(col[1],col[2],col[3])
+end
+
+-- WHEN listening for move instructions check it's alive, not been selected, and it's not already in motion.

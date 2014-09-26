@@ -22,22 +22,42 @@ function PieceManager:constructor(info)
 	info.gridPixelSize = math.floor(smallest / info.gridSize) 						-- this is how big everything is.
 	
 	self.pieceList = {} 															-- array of pieces, in order.
-	local valueList = info.factory(info.gridSize * info.gridSize)
-	print("Todo .... fail if alphabetic and 5x5 +")
+	local valueList = info.factory(info.gridSize * info.gridSize)					-- list of values
+
+	if info.isReversed then 														-- if reversed, just reverse the list of values.
+		local oldList = valueList 
+		valueList = {}
+		for i = 1,#oldList do valueList[#oldList + 1 - i] = oldList[i] end 
+	end
+	
+	local positionList = {} 														-- work out list of positions
+	for x = 1, info.gridSize do 
+		for y = 1,info.gridSize do 
+			positionList[(y-1)*info.gridSize + x] = { x = x, y = y }
+		end 
+	end 
+
+	for pass = 1,0 do  																-- randomly shuffle the position list
+		for i = 1, info.gridSize * info.gridSize do 
+			local swap = math.random(info.gridSize * info.gridSize) 
+			local t = positionList[i] 
+			positionList[i] = positionList[swap] 
+			positionList[swap] = t 
+		end 
+	end 
 
 	for i = 1, info.gridSize * info.gridSize do 									-- create them.
 		info.index = i 																-- tell it the actual real index
 		info.textValue = valueList[i] .. "" 										-- text to be displayed as a string.
 		self.pieceList[i] = Framework:new("game.piece",info) 						-- create a piece
-		self.pieceList[i]:move((i - 1) % info.gridSize + 1,math.floor((i - 1) / info.gridSize) + 1)
+		self.pieceList[i]:move(positionList[i].x,positionList[i].y) 				-- put it to its position list space.
 	end
 
 end	
 
 function PieceManager:destructor()
-	print("Destroy")
 	for i = 1,#self.pieceList do 
-		self.pieceList[i]:delete()
+		if self.pieceList[i]:isAlive() then self.pieceList[i]:delete() end
 	end 
 	self.info = nil self.pieceList = nil
 end

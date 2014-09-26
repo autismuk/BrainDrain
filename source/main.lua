@@ -50,8 +50,7 @@ manager:start("game",{ factory = facFunc, margin = 4, gridSize = 5, timeAllowed 
 --- ************************************************************************************************************************************************************************
 
 
--- send to random squares
--- add effects 
+-- add effects - rotating/shuffling, changing background 2s clock, chance of rotate/shuffle (done on update of pieceManager)
 -- handle click removal.
 -- timing 
 -- removal effect 
