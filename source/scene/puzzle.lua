@@ -9,6 +9,7 @@
 --- ************************************************************************************************************************************************************************
 
 require("utils.buttons")
+require("game.piecemanager")
 
 local PuzzleScene = Framework:createClass("scene.puzzle.scenebackground")
 
@@ -76,10 +77,8 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 	gameArea.height = display.contentHeight * 0.89 - gameArea.y
 	data.rectangle = gameArea 																	-- put in the data structure
 	
-	local r = display.newRect(gameArea.x,gameArea.y,gameArea.width,gameArea.height) 			-- show the game area, simple test
-	r.anchorX,r.anchorY = 0,0 r:setFillColor(0,0.4,0) r.alpha = 0.3 							-- normally removed.
+	scene:new("game.piece.manager",data)														-- create piece manager, this will start the game
 
-	print(data.timeAllowed)
 	return scene
 end 
 

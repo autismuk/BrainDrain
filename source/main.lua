@@ -25,8 +25,17 @@ manager:addManagedState("game",
 						Framework:new("scene.puzzle"),
 						{})
 
+local function facFunc(count) 
+	local a = {}
+	for i = 1,count do a[i] = i end
+	a[4] = "4hello"
+	a[5] = "5cat"
+	a[6] = "6antidisestablishmentarianism"
+	a[9] = "9another"
+	return a 
+end
 
-manager:start("game",{ factory = nil, margin = 4, gridSize = 5, timeAllowed = 5 * 5 * 5, 
+manager:start("game",{ factory = facFunc, margin = 4, gridSize = 5, timeAllowed = 5 * 5 * 5, 
 			 		   isReversed = false, isShuffling = false, isRotating = false, isChangingBackground = false, 
 			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false })
 
@@ -40,3 +49,10 @@ manager:start("game",{ factory = nil, margin = 4, gridSize = 5, timeAllowed = 5 
 --]]
 --- ************************************************************************************************************************************************************************
 
+
+-- send to random squares
+-- add effects 
+-- handle click removal.
+-- timing 
+-- removal effect 
+-- end game / time out / home
