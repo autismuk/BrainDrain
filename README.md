@@ -1,4 +1,4 @@
-Carousel
-========
+BrainDrain
+==========
 
-Rotating Segment Puzzle Game
+Brain sharpening game.
