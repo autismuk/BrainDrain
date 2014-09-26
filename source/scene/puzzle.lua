@@ -36,7 +36,7 @@ function PuzzleScene:constructor(info)
 	self.m_timerBar.anchorX,self.m_timerBar.anchorY = 0,0
 	self.m_timerBar:setFillColor(0,0,1)
 	self.m_TimerBarFullWidth = self.m_timerBar.width
-	self:setProgressBar(10)
+	self:setProgressBar(0)
 end 
 
 --//	Tidy up

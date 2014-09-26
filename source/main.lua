@@ -36,7 +36,7 @@ local function facFunc(count)
 end
 
 manager:start("game",{ factory = facFunc, margin = 4, gridSize = 5, timeAllowed = 5 * 5 * 5, 
-			 		   isReversed = false, isShuffling = false, isRotating = false, isChangingBackground = false, 
+			 		   isReversed = false, isShuffling = false, isRotating = false, isChangingBackground = true, 
 			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false })
 
 --- ************************************************************************************************************************************************************************
@@ -50,8 +50,8 @@ manager:start("game",{ factory = facFunc, margin = 4, gridSize = 5, timeAllowed 
 --- ************************************************************************************************************************************************************************
 
 
--- add effects - rotating/shuffling, changing background 2s clock, chance of rotate/shuffle (done on update of pieceManager)
--- handle click removal.
--- timing 
--- removal effect 
+-- add effects - rotating/shuffling, chance of rotate/shuffle (done on update of pieceManager) - moving code written.
+-- handle click & removal.
+-- timing (enterframe on background object)
+-- removal effect ?
 -- end game / time out / home
