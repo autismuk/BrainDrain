@@ -26,7 +26,9 @@ manager:addManagedState("game",
 						{})
 
 
-manager:start("game",{ })
+manager:start("game",{ factory = nil, margin = 4, gridSize = 5, timeAllowed = 5 * 5 * 5, 
+			 		   isReversed = false, isShuffling = false, isRotating = false, isChangingBackground = false, 
+			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false })
 
 --- ************************************************************************************************************************************************************************
 --[[

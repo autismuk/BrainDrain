@@ -70,6 +70,16 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 	scene:new("scene.puzzle.scenebackground",data)												-- create the background objects.
 	scene:new("control.audio", { r = 0,g = 0, b = 1 })											-- add an audio control.
 	scene:new("control.home", { x = 82, r = 0, g = 0, b = 1, listener = self, message = "home" })
+	local margin = display.contentWidth / 64 													-- margin
+	local gameArea = { x = margin, y = data.headerSpace+margin, 								-- work out game area.
+											width = display.contentWidth - margin * 2 }
+	gameArea.height = display.contentHeight * 0.89 - gameArea.y
+	data.rectangle = gameArea 																	-- put in the data structure
+	
+	local r = display.newRect(gameArea.x,gameArea.y,gameArea.width,gameArea.height) 			-- show the game area, simple test
+	r.anchorX,r.anchorY = 0,0 r:setFillColor(0,0.4,0) r.alpha = 0.3 							-- normally removed.
+
+	print(data.timeAllowed)
 	return scene
 end 
 
