@@ -63,6 +63,7 @@ local PuzzleSceneManager = Framework:createClass("scene.puzzle","game.sceneManag
 --//	Before opening a main scene, create it.
 
 function PuzzleSceneManager:preOpen(manager,data,resources)
+	self:applyDefaults(data)
 	local scene = Framework:new("game.scene")
 	local adIDs = { ios = "ca-app-pub-8354094658055499/1659828014", 							-- admob identifiers.
 					android = "ca-app-pub-8354094658055499/7706361613" }
@@ -82,6 +83,17 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 	return scene
 end 
 
+function PuzzleSceneManager:applyDefaults(def)
+	def.margin = def.margin or 4
+	def.gridSize = def.gridSize or 5
+	def.timeAllowed = def.timeAllowed or (def.gridSize * def.gridSize * 5)
+	def.isReversed = def.isReversed or false 
+	def.isShuffling = def.isShuffling or false 
+	def.isRotating = def.isRotating or false 
+	def.isChangingBackground = def.isChangingBackground or false 
+	def.isVerticallyMirrored = def.isVerticallyMirrored or false 
+	def.isHorizontallyMirrored = def.isHorizontallyMirrored or false 
+end
 
 --- ************************************************************************************************************************************************************************
 --[[

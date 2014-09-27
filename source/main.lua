@@ -17,7 +17,7 @@ require("utils.admob")
 require("scene.puzzle")
 
 Framework:new("audio.sound",																	-- create sounds object
-					{ sounds = { } })
+					{ sounds = { "correct","wrong" } })
 
 local manager = Framework:new("game.manager") 													-- Create a new game manager and add states.
 
@@ -35,9 +35,10 @@ local function facFunc(count)
 	return a 
 end
 
-manager:start("game",{ factory = facFunc, margin = 4, gridSize = 5, timeAllowed = 5 * 5 * 5, 
-			 		   isReversed = false, isShuffling = false, isRotating = false, isChangingBackground = true, 
-			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false })
+manager:start("game",{ factory = facFunc })
+--, margin = 4, gridSize = 5, timeAllowed = 5 * 5 * 5, 
+--			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
+--			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -49,9 +50,12 @@ manager:start("game",{ factory = facFunc, margin = 4, gridSize = 5, timeAllowed 
 --]]
 --- ************************************************************************************************************************************************************************
 
-
+-- add in default values.
 -- add effects - rotating/shuffling, chance of rotate/shuffle (done on update of pieceManager) - moving code written.
--- handle click & removal.
--- timing (enterframe on background object)
--- removal effect ?
+-- handle click & removal, use star effect to remove, play right/wrong fx
+-- timing counter (enterframe on background object)
+-- adjust particle to fix ParticleLifeSpanInSeconds ?
+-- main menu etc.
+-- "use your own word list"
+
 -- end game / time out / home

@@ -9,6 +9,7 @@
 --- ************************************************************************************************************************************************************************
 
 require("game.piece")
+require("utils.particle")
 
 local PieceManager = Framework:createClass("game.piece.manager")
 
@@ -54,12 +55,8 @@ function PieceManager:constructor(info)
 	end
 
 	self:tag("enterFrame")
-
-	print("Moving test code")
-	timer.performWithDelay(2000, function() 
-		self:sendMessage("piece","move",{ fromX = 1,fromY = 2,toX = 4,toY = 5 })
-		self:sendMessage("piece","move",{ fromX = 4,fromY = 5,toX = 1,toY = 2 })
-	end)
+	self.m_nextRequiredClick = 1 													-- index of next required click
+	self.m_lastRequiredClick = info.gridSize * info.gridSize 						-- last required click.
 end	
 
 function PieceManager:destructor()
@@ -79,5 +76,35 @@ function PieceManager:onEnterFrame(dt)
 				self.m_pieceList[n]:changeBackground()
 			end
 		end
+		local chance = 5 if self.m_info.isHard then chance = 2 end 					-- hard or easy for rotate/shuffle
+		if math.random(chance) == 1 then 											-- random chance of rotate/shuffle.
+			local event = 0
+			if self.m_info.isShuffling then event = 1 end 							-- decide what to do
+			if self.m_info.isRotating then event = 2 end 
+			if self.m_info.isShuffling and self.m_info.isRotating then 				-- if both, then choose one randomly.
+				event = math.random(1,2)
+			end
+			if event == 1 then self:shuffle() end 									-- then go do it.
+			if event == 2 then self:rotate() end 
+		end
 	end
 end
+
+function PieceManager:shuffle()
+	local size = self.m_info.gridSize 												-- number of rows/cols.
+	local row = math.random(size) 													-- this is the row we are going to shuffle (rubiks cube style)
+	for i = 1,size-1 do 															-- move all but the end one right one.
+		self:sendMessage("piece","move", { fromX = i, fromY = row, toX = i+1, toY = row })
+	end
+	self:sendMessage("piece","move", { fromX = size, fromY = row, toX = 1, toY = row})
+end 
+
+function PieceManager:rotate()
+	local size = self.m_info.gridSize 												-- number of rows/cols.
+	for i = 1,size-1 do 
+		self:sendMessage("piece","move", { fromX = i, fromY = 1, toX = i+1, toY = 1 })
+		self:sendMessage("piece","move", { fromX = size, fromY = i, toX = size, toY = i+1 })
+		self:sendMessage("piece","move", { fromX = i+1, fromY = size, toX = i, toY = size })
+		self:sendMessage("piece","move", { fromX = 1, fromY = i+1, toX = 1, toY = i })
+	end 
+end 
