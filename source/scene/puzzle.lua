@@ -10,8 +10,9 @@
 
 require("utils.buttons")
 require("game.piecemanager")
+require("utils.fontmanager")
 
-local PuzzleScene = Framework:createClass("scene.puzzle.scenebackground")
+local PuzzleScene = Framework:createClass("scene.puzzle.scenebackground","system.controllable")
 
 function PuzzleScene:constructor(info)
 	self.m_group = display.newGroup()															-- group for all graphic objects
@@ -37,6 +38,12 @@ function PuzzleScene:constructor(info)
 	self.m_timerBar:setFillColor(0,0,1)
 	self.m_TimerBarFullWidth = self.m_timerBar.width
 	self:setProgressBar(0)
+
+	local t = display.newBitmapText(self.m_group,"GET READY !",160,240,"badabb",88)
+	t:setTintColor(1,0,0)
+	timer.performWithDelay(4000,function() self:setControllableEnabled(true) t:removeSelf() end) 			
+	print("Temporary, done when the Get Ready ! message goes")
+
 end 
 
 --//	Tidy up
@@ -79,10 +86,6 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 	data.rectangle = gameArea 																	-- put in the data structure
 	
 	scene:new("game.piece.manager",data)														-- create piece manager, this will start the game
-
-	timer.performWithDelay(4000,function() self:setControllableEnabled(true) end) 			
-	print("Temporary, done when the Get Ready ! message goes")
-
 	return scene
 end 
 

@@ -64,7 +64,6 @@ manager:start("game",{ factory = facFunc, gridSize = 2 })
 --]]
 --- ************************************************************************************************************************************************************************
 
--- start state / send to all objects "start" code 
 -- timing counter (enterframe on background object)
 -- make timer controllable.
 -- starting message / ending message
