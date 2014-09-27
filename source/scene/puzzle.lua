@@ -80,6 +80,9 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 	
 	scene:new("game.piece.manager",data)														-- create piece manager, this will start the game
 
+	timer.performWithDelay(4000,function() self:setControllableEnabled(true) end) 			
+	print("Temporary, done when the Get Ready ! message goes")
+
 	return scene
 end 
 

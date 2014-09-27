@@ -9,8 +9,9 @@
 --- ************************************************************************************************************************************************************************
 
 require("utils.particle")
+require("utils.controllable")
 
-local Piece = Framework:createClass("game.piece")
+local Piece = Framework:createClass("game.piece","system.controllable")
 
 function Piece:constructor(info)
 	self.m_hasBeenKilled = false 													-- set to true when has been killed but running end animation
@@ -51,7 +52,9 @@ end
 
 function Piece:tap(e)
 	if self:isAlive() and not self.m_hasBeenKilled then 							-- if still active.
-		self:sendMessage("pieceManager","tap",{ index = self.m_index })				-- tapped, send message to manager about this.
+		if self:isEnabled() then 													-- and it has been enabled
+			self:sendMessage("pieceManager","tap",{ index = self.m_index })			-- tapped, send message to manager about this.
+		end
 	end
 end 
 

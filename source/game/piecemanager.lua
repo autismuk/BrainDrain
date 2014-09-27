@@ -13,7 +13,7 @@ require("game.piece")
 local PieceManager = Framework:createClass("game.piece.manager")
 
 function PieceManager:constructor(info)
-	self.m_info = info 																-- save information
+	self.m_info = info 																-- save information.
 	local rect = info.rectangle 													-- calculate rectangle.
 	info.centre = { x = rect.x + rect.width/2, y = rect.y + rect.height / 2}		-- calculate the centre of the play area 
 
