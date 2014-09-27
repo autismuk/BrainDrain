@@ -8,6 +8,8 @@
 ---
 --- ************************************************************************************************************************************************************************
 
+require("utils.particle")
+
 local Piece = Framework:createClass("game.piece")
 
 function Piece:constructor(info)
@@ -38,12 +40,29 @@ function Piece:constructor(info)
 	self.m_group.alpha = 0 															-- can't be seen initially
 	self:changeBackground()															-- pick random background
 	self:tag("piece")																-- tag as piece
+	self.m_group:addEventListener("tap",self)										-- listen for taps.
 end 
 
 function Piece:destructor()
-	self.m_group:removeSelf()
-	self.m_info = nil self.m_group = nil self.m_piece = nil
+	self.m_group:removeEventListener("tap",self)									-- remove event listener
+	self.m_group:removeSelf() 														-- remove object
+	self.m_info = nil self.m_group = nil self.m_piece = nil 						-- clean up
 end
+
+function Piece:tap(e)
+	if self:isAlive() and not self.m_hasBeenKilled then 							-- if still active.
+		self:sendMessage("pieceManager","tap",{ index = self.m_index })				-- tapped, send message to manager about this.
+	end
+end 
+
+function Piece:remove()
+	self.m_hasBeenKilled = true 													-- piece no longer alive.
+	transition.to(self.m_group, { time = 300, xScale = 0.1, yScale = 0.1, 			-- make it vanish
+		onComplete = function() 													-- at end
+			Framework:new("graphics.particle.short", { x = self.m_group.x,y = self.m_group.y, time = 1, emitter = "StarExplosion"})
+			self:delete()															-- destroy the piece
+		end })
+end 
 
 function Piece:move(x,y)
 	self.m_currentX,self.m_currentY = x,y 											-- update current position

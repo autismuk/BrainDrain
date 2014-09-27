@@ -9,7 +9,6 @@
 --- ************************************************************************************************************************************************************************
 
 require("game.piece")
-require("utils.particle")
 
 local PieceManager = Framework:createClass("game.piece.manager")
 
@@ -54,7 +53,7 @@ function PieceManager:constructor(info)
 		self.m_pieceList[i]:move(positionList[i].x,positionList[i].y) 				-- put it to its position list space.
 	end
 
-	self:tag("enterFrame")
+	self:tag("enterFrame,pieceManager")
 	self.m_nextRequiredClick = 1 													-- index of next required click
 	self.m_lastRequiredClick = info.gridSize * info.gridSize 						-- last required click.
 end	
@@ -108,3 +107,16 @@ function PieceManager:rotate()
 		self:sendMessage("piece","move", { fromX = 1, fromY = i+1, toX = 1, toY = i })
 	end 
 end 
+
+function PieceManager:onMessage(sender,name,body)
+	if name == "tap" then 															-- is it tapped ?
+		local index = body.index 
+		if index == self.m_nextRequiredClick then 									-- is it the correct one ?
+			self:playSound("correct")
+			self.m_nextRequiredClick = self.m_nextRequiredClick + 1 
+			sender:remove()
+		else 
+			self:playSound("wrong")
+		end 
+	end
+end

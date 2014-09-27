@@ -35,7 +35,7 @@ local function facFunc(count)
 	return a 
 end
 
-manager:start("game",{ factory = facFunc })
+manager:start("game",{ factory = facFunc, gridSize = 2 })
 --, margin = 4, gridSize = 5, timeAllowed = 5 * 5 * 5, 
 --			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
 --			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
@@ -50,10 +50,8 @@ manager:start("game",{ factory = facFunc })
 --]]
 --- ************************************************************************************************************************************************************************
 
--- add in default values.
--- add effects - rotating/shuffling, chance of rotate/shuffle (done on update of pieceManager) - moving code written.
--- handle click & removal, use star effect to remove, play right/wrong fx
 -- timing counter (enterframe on background object)
+-- handle end of game stuff.
 -- adjust particle to fix ParticleLifeSpanInSeconds ?
 -- main menu etc.
 -- "use your own word list"
