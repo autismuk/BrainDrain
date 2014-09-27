@@ -114,7 +114,10 @@ function PieceManager:onMessage(sender,name,body)
 		if index == self.m_nextRequiredClick then 									-- is it the correct one ?
 			self:playSound("correct")
 			self.m_nextRequiredClick = self.m_nextRequiredClick + 1 
-			sender:remove()
+			sender:remove()															-- make it go away
+			if self.m_nextRequiredClick > self.m_lastRequiredClick then 			-- completed ?
+				error("Completed")
+			end
 		else 
 			self:playSound("wrong")
 		end 

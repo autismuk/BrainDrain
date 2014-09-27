@@ -9,6 +9,7 @@
 --- ************************************************************************************************************************************************************************
 
 ApplicationVersion = "v0.1"
+
 display.setStatusBar(display.HiddenStatusBar)													-- hide status bar.
 require("strict")																				-- install strict.lua to track globals etc.
 require("framework.framework")																	-- framework.
@@ -50,9 +51,13 @@ manager:start("game",{ factory = facFunc, gridSize = 2 })
 --]]
 --- ************************************************************************************************************************************************************************
 
+-- start state / send to all objects "start" code.
 -- timing counter (enterframe on background object)
+-- starting message / ending message
+-- stub states (title, setup game, score)
+-- difficulty level calculator, score calculator, high score (Rob's code)
+-- gui design and implementation
 -- handle end of game stuff.
--- adjust particle to fix ParticleLifeSpanInSeconds ?
 -- main menu etc.
 -- "use your own word list"
 

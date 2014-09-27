@@ -57,7 +57,7 @@ end
 
 function Piece:remove()
 	self.m_hasBeenKilled = true 													-- piece no longer alive.
-	transition.to(self.m_group, { time = 300, xScale = 0.1, yScale = 0.1, 			-- make it vanish
+	transition.to(self.m_group, { time = 300, xScale = 0.1, yScale = 0.1, 			-- make it vanish by shrinking to near nothing
 		onComplete = function() 													-- at end
 			Framework:new("graphics.particle.short", { x = self.m_group.x,y = self.m_group.y, time = 1, emitter = "StarExplosion"})
 			self:delete()															-- destroy the piece
