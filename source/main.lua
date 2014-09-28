@@ -64,13 +64,12 @@ manager:start("game",{ factory = facFunc, gridSize = 2 })
 --]]
 --- ************************************************************************************************************************************************************************
 
--- timing counter (enterframe on background object)
--- make timer controllable.
--- starting message / ending message
--- difficulty level calculator, score calculator, high score (Rob's code)
+-- home button immediate fail.
+-- difficulty level calculator
+-- high score table and offline storage (see Rob's code)
 -- gui design and implementation
--- handle end of game stuff.
--- main menu etc.
+-- main setup
+-- title screen (graphic exists)
 -- "use your own word list"
 
 -- end game / time out / home

@@ -116,7 +116,7 @@ function PieceManager:onMessage(sender,name,body)
 			self.m_nextRequiredClick = self.m_nextRequiredClick + 1 
 			sender:remove()															-- make it go away
 			if self.m_nextRequiredClick > self.m_lastRequiredClick then 			-- completed ?
-				error("Completed")
+				self:sendMessage("puzzleSceneManager","complete",{ completed = true })	-- tell the puzzle scene manager
 			end
 		else 
 			self:playSound("wrong")
