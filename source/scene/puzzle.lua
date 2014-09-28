@@ -98,6 +98,7 @@ local PuzzleSceneManager = Framework:createClass("scene.puzzle","game.sceneManag
 function PuzzleSceneManager:preOpen(manager,data,resources)
 	self:applyDefaults(data)																	-- defaults
 	self.m_difficulty = self:calculateDifficulty(data) 											-- calculate difficulty as percentage
+	print(self.m_difficulty)
 	local scene = Framework:new("game.scene")
 	local adIDs = { ios = "ca-app-pub-8354094658055499/1659828014", 							-- admob identifiers.
 					android = "ca-app-pub-8354094658055499/7706361613" }
@@ -106,7 +107,7 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 
 	scene:new("scene.puzzle.scenebackground",data)												-- create the background objects.
 	scene:new("control.audio", { r = 0,g = 0, b = 1 })											-- add an audio control.
-	scene:new("control.home", { x = 82, r = 0, g = 0, b = 1, listener = self, message = "home" })
+	scene:new("control.home", { x = 82, r = 0, g = 0, b = 1, listener = self, message = "abandon" })
 	local margin = display.contentWidth / 64 													-- margin
 	local gameArea = { x = margin, y = data.headerSpace+margin, 								-- work out game area.
 											width = display.contentWidth - margin * 2 }
@@ -120,6 +121,10 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 end 
 
 function PuzzleSceneManager:onMessage(sender,message,body)
+	if message == "iconbutton" then 															-- there is only one icon button message
+		self:performGameEvent("exit",{}) 														-- so if clicked go back to the main screen
+		return 
+	end
 	body.baseScore = Framework.fw.timer:getSecondsRemaining()									-- copy in the body score
 	if not body.completed then body.baseScore = 0 end 											-- score nothing if did not complete.
 	body.difficulty = self.m_difficulty 														-- and the difficulty level.
@@ -148,7 +153,15 @@ function PuzzleSceneManager:applyDefaults(def)
 end
 
 function PuzzleSceneManager:calculateDifficulty(setup)
-	return 42 
+	local diff = { nil, 40,60,100,130,160,200 }													-- difficulty for 1..7
+	diff = diff[setup.gridSize]																	-- get the difficulty
+	if setup.isReversed then diff = diff + 25 end 												-- 25% for backwards
+	if setup.isShuffling then diff = diff + 20 end 												-- 20% for row shuffling
+	if setup.isRotating then diff = diff + 30 end 												-- 30% for rotating frame
+	if setup.isChangingBackground then diff = diff + 10 end 									-- 10% for changing background
+	if setup.isVerticallyMirrored then diff = diff + 25 end 									-- 25% for vertical flip
+	if setup.isHorizontallyMirrored then diff = diff + 20 end 									-- 20% for horizontal flip
+	return diff
 end 
 
 --- ************************************************************************************************************************************************************************

@@ -49,10 +49,10 @@ local function facFunc(count)
 	return a 
 end
 
-manager:start("game",{ factory = facFunc, gridSize = 2 })
---, margin = 4, gridSize = 5, timeAllowed = 5 * 5 * 5, 
---			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
---			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
+manager:start("game",{ factory = facFunc, 
+ margin = 4, gridSize = 2, timeAllowed = 33, 
+			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
+			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -64,8 +64,6 @@ manager:start("game",{ factory = facFunc, gridSize = 2 })
 --]]
 --- ************************************************************************************************************************************************************************
 
--- home button immediate fail.
--- difficulty level calculator
 -- high score table and offline storage (see Rob's code)
 -- gui design and implementation
 -- main setup
