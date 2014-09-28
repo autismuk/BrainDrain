@@ -98,7 +98,6 @@ local PuzzleSceneManager = Framework:createClass("scene.puzzle","game.sceneManag
 function PuzzleSceneManager:preOpen(manager,data,resources)
 	self:applyDefaults(data)																	-- defaults
 	self.m_difficulty = self:calculateDifficulty(data) 											-- calculate difficulty as percentage
-	print(self.m_difficulty)
 	local scene = Framework:new("game.scene")
 	local adIDs = { ios = "ca-app-pub-8354094658055499/1659828014", 							-- admob identifiers.
 					android = "ca-app-pub-8354094658055499/7706361613" }

@@ -17,6 +17,7 @@ require("utils.sound")
 require("utils.admob")
 require("utils.stubscene")
 require("scene.puzzle")
+require("utils.document")
 
 Framework:new("audio.sound",																	-- create sounds object
 					{ sounds = { "correct","wrong" } })
@@ -50,9 +51,9 @@ local function facFunc(count)
 end
 
 manager:start("game",{ factory = facFunc, 
- margin = 4, gridSize = 2, timeAllowed = 33, 
+ margin = 4, gridSize = 7, timeAllowed = 13, 
 			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
-			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
+			 		   isVerticallyMirrored = true, isHorizontallyMirrored = false, isHard = true })
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -64,12 +65,11 @@ manager:start("game",{ factory = facFunc,
 --]]
 --- ************************************************************************************************************************************************************************
 
--- high score table and offline storage (see Rob's code)
+-- offline storage (see Rob's code)
+-- high score table (ditto)
 -- gui design and implementation
--- main setup
+-- main setup screen (preserves state in offline storage)
 -- title screen (graphic exists)
 -- "use your own word list"
 
--- end game / time out / home
-
--- the superclass thing for decoration ????
+-- the superclass thing for decoration ???? - mixin still needs same ?
