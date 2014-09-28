@@ -13,14 +13,16 @@ ApplicationVersion = "v0.1"
 display.setStatusBar(display.HiddenStatusBar)													-- hide status bar.
 require("strict")																				-- install strict.lua to track globals etc.
 require("framework.framework")																	-- framework.
-require("utils.sound")
-require("utils.admob")
 require("utils.stubscene")
-require("scene.puzzle")
 require("utils.document")
+require("utils.sound")
+require("scene.puzzle")
 
 Framework:new("audio.sound",																	-- create sounds object
 					{ sounds = { "correct","wrong" } })
+
+Framework:new("document.store",																	-- load/create the document store that we will use.
+					{ appName = "uk.org.robsons.BrainWash"})
 
 local manager = Framework:new("game.manager") 													-- Create a new game manager and add states.
 
@@ -51,7 +53,7 @@ local function facFunc(count)
 end
 
 manager:start("game",{ factory = facFunc, 
- margin = 4, gridSize = 7, timeAllowed = 13, 
+ margin = 4, gridSize = 7, timeAllowed = 10, 
 			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
 			 		   isVerticallyMirrored = true, isHorizontallyMirrored = false, isHard = true })
 
@@ -65,11 +67,14 @@ manager:start("game",{ factory = facFunc,
 --]]
 --- ************************************************************************************************************************************************************************
 
--- offline storage (see Rob's code)
+-- bigger turmoil buttons for standard ones (small collision area ????) ? have extended click area.
+-- why doesn't font display on iOS *only*
+-- high score class
+-- generic scene class
 -- high score table (ditto)
 -- gui design and implementation
 -- main setup screen (preserves state in offline storage)
--- title screen (graphic exists)
+-- title screen (graphic exists) (use ApplicationVersion)
 -- "use your own word list"
 
 -- the superclass thing for decoration ???? - mixin still needs same ?

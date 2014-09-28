@@ -73,7 +73,7 @@ function Piece:move(x,y)
 	x = (x - offset) * (self.m_info.gridPixelSize + self.m_info.margin) + self.m_info.centre.x
 	y = (y - offset) * (self.m_info.gridPixelSize + self.m_info.margin) + self.m_info.centre.y
 	transition.cancel(self.m_group)													-- stop any ongoing transitions.
-	self.m_group:toFront() 															-- move moving pieces to the front
+	--self.m_group:toFront() 															-- move moving pieces to the front
 	self.m_inMotion = true 															-- mark as in progress so we don't accept any more moves
 	transition.to(self.m_group, { time = 900, alpha = 1, x = x, y = y, 				-- and move
 								onComplete = function() self.m_inMotion = false end })

@@ -12,6 +12,7 @@ require("utils.buttons")
 require("game.piecemanager")
 require("utils.fontmanager")
 require("utils.music")
+require("utils.admob")
 
 local PuzzleScene = Framework:createClass("scene.puzzle.scenebackground","system.controllable")
 
