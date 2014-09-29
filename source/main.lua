@@ -67,11 +67,11 @@ manager:start("game",{ factory = facFunc,
 --]]
 --- ************************************************************************************************************************************************************************
 
--- bigger turmoil buttons for standard ones (small collision area ????) ? have extended click area.
--- why doesn't font display on iOS *only*
--- high score class
--- generic scene class
--- high score table (ditto)
+-- Application description global, back patch into document.store
+-- bigger turmoil buttons for standard ones (small collision area ????) ? have extended click area same size graphics
+-- high score class, has score and associated data.
+-- generic scene class, extend to delayed scene class and clickable scene class to progress.
+-- current & high score table (combining the two)
 -- gui design and implementation
 -- main setup screen (preserves state in offline storage)
 -- title screen (graphic exists) (use ApplicationVersion)
