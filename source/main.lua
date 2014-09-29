@@ -8,21 +8,23 @@
 ---
 --- ************************************************************************************************************************************************************************
 
-ApplicationVersion = "v0.1"
+ApplicationDescription = { 																		-- application description.
+	appName = "BrainWash",
+	version = "0.1",
+	developers = { "Paul Robson" },
+	email = "paul@robsons.org.uk",
+	fqdn = "uk.org.robsons.brainwash"
+}
 
 display.setStatusBar(display.HiddenStatusBar)													-- hide status bar.
 require("strict")																				-- install strict.lua to track globals etc.
 require("framework.framework")																	-- framework.
 require("utils.stubscene")
-require("utils.document")
 require("utils.sound")
 require("scene.puzzle")
 
 Framework:new("audio.sound",																	-- create sounds object
 					{ sounds = { "correct","wrong" } })
-
-Framework:new("document.store",																	-- load/create the document store that we will use.
-					{ appName = "uk.org.robsons.BrainWash"})
 
 local manager = Framework:new("game.manager") 													-- Create a new game manager and add states.
 
@@ -47,15 +49,15 @@ local function facFunc(count)
 	for i = 1,count do a[i] = i end
 	a[4] = "4hello"
 	a[5] = "5cat"
-	a[6] = "6antidisestablishmentarianism"
+	a[6] = "6terrible"
 	a[9] = "9another"
 	return a 
 end
 
 manager:start("game",{ factory = facFunc, 
- margin = 4, gridSize = 7, timeAllowed = 10, 
+ margin = 4, gridSize = 5, timeAllowed = 10, 
 			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
-			 		   isVerticallyMirrored = true, isHorizontallyMirrored = false, isHard = true })
+			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -67,8 +69,6 @@ manager:start("game",{ factory = facFunc,
 --]]
 --- ************************************************************************************************************************************************************************
 
--- Application description global, back patch into document.store
--- bigger turmoil buttons for standard ones (small collision area ????) ? have extended click area same size graphics
 -- high score class, has score and associated data.
 -- generic scene class, extend to delayed scene class and clickable scene class to progress.
 -- current & high score table (combining the two)

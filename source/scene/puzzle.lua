@@ -26,17 +26,17 @@ function PuzzleScene:constructor(info)
 	background.fill = { type = "image", filename = "images/mosaicb.jpg" }
 	background.fill.scaleX,background.fill.scaleY = 0.2,0.15
 	local frame = display.newRoundedRect(self.m_group,											-- timer bar background
-						display.contentWidth * 0.2,display.contentHeight * 0.91,
+						display.contentWidth * 0.2,display.contentHeight * 0.95,
 						display.contentWidth * 0.6,display.contentHeight * 0.05,
-						12)
-	frame.anchorX,frame.anchorY = 0,0
+						display.contentHeight * 0.05/2)
+	frame.anchorX,frame.anchorY = 0,0.5
 	frame:setFillColor(0,0.5,0.7)
 	
 	self.m_timerBar = display.newRoundedRect(self.m_group,										-- timer bar
-						display.contentWidth * 0.2,display.contentHeight * 0.91,
+						display.contentWidth * 0.2,display.contentHeight * 0.95,
 						display.contentWidth * 0.6,display.contentHeight * 0.05,
-						12)
-	self.m_timerBar.anchorX,self.m_timerBar.anchorY = 0,0
+						display.contentHeight * 0.05/2)
+	self.m_timerBar.anchorX,self.m_timerBar.anchorY = 0,0.5
 	self.m_timerBar:setFillColor(0,0,1)
 	self.m_TimerBarFullWidth = self.m_timerBar.width
 	self:setProgressBar(0) 																		-- reset progress bar
@@ -63,7 +63,7 @@ end
 
 function PuzzleScene:setProgressBar(percent)
 	percent = math.max(0,math.min(percent,100))
-	self.m_timerBar.width = self.m_TimerBarFullWidth * (percent / 100 * 0.88 + 0.12)
+	self.m_timerBar.width = self.m_TimerBarFullWidth * (percent / 100 * 0.90 + 0.12)
 end
 
 function PuzzleScene:destructor() 
@@ -107,7 +107,7 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 
 	scene:new("scene.puzzle.scenebackground",data)												-- create the background objects.
 	scene:new("control.audio", { r = 0,g = 0, b = 1 })											-- add an audio control.
-	scene:new("control.home", { x = 82, r = 0, g = 0, b = 1, listener = self, message = "abandon" })
+	scene:new("control.home", { x = 90, r = 0, g = 0, b = 1, listener = self, message = "abandon" })
 	local margin = display.contentWidth / 64 													-- margin
 	local gameArea = { x = margin, y = data.headerSpace+margin, 								-- work out game area.
 											width = display.contentWidth - margin * 2 }
