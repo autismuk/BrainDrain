@@ -13,6 +13,7 @@ require("game.piecemanager")
 require("utils.fontmanager")
 require("utils.music")
 require("utils.admob")
+require("utils.text")
 
 local PuzzleScene = Framework:createClass("scene.puzzle.scenebackground","system.controllable")
 
@@ -75,31 +76,7 @@ function PuzzleScene:getSecondsRemaining()
 	return math.floor(math.max(self.m_totalTime - self.m_elapsedTime,0))
 end
 
-local TextScene = Framework:createClass("scene.puzzle.text")
 
-function TextScene:constructor()
-	local txt = display.newBitmapText("GET READY !", 								-- put up 'get ready'
-								display.contentWidth/2,display.contentHeight/2,"badabb",display.contentWidth/4) 			
-	txt:setTintColor(1,1,0) txt.alpha = 0 														-- yellow and hidden
-	transition.to(txt, { time = 1500, alpha = 1, onComplete = function() 						-- transition it visible
-		timer.performWithDelay(1000,function() 													-- hold
-			self:setControllableEnabled(true) 													-- everything on
-			transition.to(txt, { time = 750, y = -80, alpha = 0.1, onComplete = function() 		-- whizz off the screen
-				txt:removeSelf() 																-- and delete text object
-			end })
-		end)
-	end })
-	self.m_text = txt
-end
-
-function TextScene:destructor()
-	self.m_text:removeSelf() 
-	self.m_text = nil 
-end 
-
-function TextScene:getDisplayObjects()
-	return { self.m_text }
-end 
 
 local PuzzleSceneManager = Framework:createClass("scene.puzzle","game.sceneManager")
 
@@ -122,11 +99,22 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 											width = display.contentWidth - margin * 2 }
 	gameArea.height = display.contentHeight * 0.89 - gameArea.y
 	data.rectangle = gameArea 																	-- put in the data structure
-	
 	scene:new("game.piece.manager",data)														-- create piece manager, this will start the game
-	scene:new("scene.puzzle.text")
+
+	scene:new("control.text", { text = "GET READY", font = "badabb", alpha = 1, 				-- add the 'get ready' text
+								tint = { r = 1,g = 1,b = 0} ,
+								transition = { time = 1500, alpha = 1 ,
+									onComplete = function(item) 								-- transition it visible
+									timer.performWithDelay(1000,function() 				-- hold it briefly.
+											self:setControllableEnabled(true) 			-- everything on
+											transition.to(item, { time = 750, y = -80, 
+																  alpha = 0.1, 
+																  onComplete = function() item:removeSelf() end })
+											end)
+									 end }
+	})
 	self:tag("puzzleSceneManager")																-- tag it.
-	scene:new("audio.music")
+	scene:new("audio.music") 																	-- start the background music.
 	return scene
 end 
 
