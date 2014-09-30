@@ -83,6 +83,10 @@ Piece.backgroundList = { 															-- possible background colours
 	{ 0,0,0 }, { 0,0,1 }, { 0,0.5,0 }, { 1,0,0 }, { 1,0.5,0 }, { 0.5,0.5,0.5 }, {160/255,82/255,45/255}
 }
 
+function Piece:getDisplayObject()
+	return self.m_group 
+end 
+
 function Piece:changeBackground()
 	if self.m_hasBeenKilled then return end 										-- don't change if going
 	local n = math.random(#Piece.backgroundList)									-- pick a colour

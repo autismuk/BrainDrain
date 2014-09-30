@@ -22,6 +22,7 @@ function PieceManager:constructor(info)
 	info.gridPixelSize = math.floor(smallest / info.gridSize) 						-- this is how big everything is.
 	
 	self.m_pieceList = {} 															-- array of pieces, in order.
+	self.m_displayList = {}
 	local valueList = info.factory(info.gridSize * info.gridSize)					-- list of values
 
 	if info.isReversed then 														-- if reversed, just reverse the list of values.
@@ -51,6 +52,7 @@ function PieceManager:constructor(info)
 		info.textValue = valueList[i] .. "" 										-- text to be displayed as a string.
 		self.m_pieceList[i] = Framework:new("game.piece",info) 						-- create a piece
 		self.m_pieceList[i]:move(positionList[i].x,positionList[i].y) 				-- put it to its position list space.
+		self.m_displayList[i] = self.m_pieceList[i]:getDisplayObject() 				-- create display object list.
 	end
 
 	self:tag("enterFrame,pieceManager")
@@ -64,6 +66,10 @@ function PieceManager:destructor()
 	end 
 	self.m_info = nil self.m_pieceList = nil
 end
+
+function PieceManager:getDisplayObjects()
+	return self.m_displayList
+end 
 
 function PieceManager:onEnterFrame(dt)
 	self.m_time = (self.m_time or 0) + dt 											-- add to clock

@@ -18,7 +18,7 @@ local PuzzleScene = Framework:createClass("scene.puzzle.scenebackground","system
 
 function PuzzleScene:constructor(info)
 	self.m_group = display.newGroup()															-- group for all graphic objects
-	local background = display.newRect(0,info.headerSpace,										-- mosaic background
+	local background = display.newRect(self.m_group,0,info.headerSpace,							-- mosaic background
 						display.contentWidth,display.contentHeight-info.headerSpace)
 	background.anchorX,background.anchorY = 0,0
 	display.setDefault("textureWrapX","repeat")
@@ -44,19 +44,6 @@ function PuzzleScene:constructor(info)
 	self.m_totalTime = info.timeAllowed
 	self:tag("enterFrame")																		-- gets enterFrame
 	self:name("timer")																			-- name it 'timer'
-
-	local txt = display.newBitmapText(self.m_group,"GET READY !", 								-- put up 'get ready'
-								display.contentWidth/2,display.contentHeight/2,"badabb",display.contentWidth/4) 			
-	txt:setTintColor(1,1,0) txt.alpha = 0 														-- yellow and hidden
-	transition.to(txt, { time = 1500, alpha = 1, onComplete = function() 						-- transition it visible
-		timer.performWithDelay(1000,function() 													-- hold
-			self:setControllableEnabled(true) 													-- everything on
-			transition.to(txt, { time = 750, y = -80, alpha = 0.1, onComplete = function() 		-- whizz off the screen
-				txt:removeSelf() 																-- and delete text object
-			end })
-		end)
-	end })
-
 end 
 
 --//	Tidy up
@@ -69,10 +56,6 @@ end
 function PuzzleScene:destructor() 
 	self.m_group:removeSelf() 																	-- remove graphics
 	self.m_group = nil self.m_timerBar = nil
-end 
-
-function PuzzleScene:tap(event)
-	self:performGameEvent("start") 																-- and run it
 end 
 
 function PuzzleScene:getDisplayObjects() return { self.m_group } end
@@ -91,6 +74,32 @@ function PuzzleScene:getSecondsRemaining()
 	self:tag("-enterFrame")																		-- stop the clock
 	return math.floor(math.max(self.m_totalTime - self.m_elapsedTime,0))
 end
+
+local TextScene = Framework:createClass("scene.puzzle.text")
+
+function TextScene:constructor()
+	local txt = display.newBitmapText("GET READY !", 								-- put up 'get ready'
+								display.contentWidth/2,display.contentHeight/2,"badabb",display.contentWidth/4) 			
+	txt:setTintColor(1,1,0) txt.alpha = 0 														-- yellow and hidden
+	transition.to(txt, { time = 1500, alpha = 1, onComplete = function() 						-- transition it visible
+		timer.performWithDelay(1000,function() 													-- hold
+			self:setControllableEnabled(true) 													-- everything on
+			transition.to(txt, { time = 750, y = -80, alpha = 0.1, onComplete = function() 		-- whizz off the screen
+				txt:removeSelf() 																-- and delete text object
+			end })
+		end)
+	end })
+	self.m_text = txt
+end
+
+function TextScene:destructor()
+	self.m_text:removeSelf() 
+	self.m_text = nil 
+end 
+
+function TextScene:getDisplayObjects()
+	return { self.m_text }
+end 
 
 local PuzzleSceneManager = Framework:createClass("scene.puzzle","game.sceneManager")
 
@@ -115,6 +124,7 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 	data.rectangle = gameArea 																	-- put in the data structure
 	
 	scene:new("game.piece.manager",data)														-- create piece manager, this will start the game
+	scene:new("scene.puzzle.text")
 	self:tag("puzzleSceneManager")																-- tag it.
 	scene:new("audio.music")
 	return scene
@@ -132,8 +142,9 @@ function PuzzleSceneManager:onMessage(sender,message,body)
 	self:setControllableEnabled(false)															-- turn off controllables.
 	local text = "TIME UP !"
 	if body.completed then text = "GOAL IN !" end 
-	text = display.newBitmapText(text, 															-- put up text
-								display.contentWidth/2,-40,"badabb",display.contentWidth/4)
+	local group = self:getScene():getContainer() 												-- get current scene's container
+	text = display.newBitmapText(group,text, 													-- put up text
+									display.contentWidth/2,-40,"badabb",display.contentWidth/4)
 	text:setTintColor(0,1,1)
 	transition.to(text, { time = 2000, y = display.contentHeight / 2, 							-- bounce it in.
 											transition = easing.outBounce })

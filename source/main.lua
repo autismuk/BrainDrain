@@ -18,6 +18,7 @@ ApplicationDescription = { 																		-- application description.
 
 display.setStatusBar(display.HiddenStatusBar)													-- hide status bar.
 require("strict")																				-- install strict.lua to track globals etc.
+
 require("framework.framework")																	-- framework.
 require("utils.stubscene")
 require("utils.sound")
@@ -29,20 +30,20 @@ Framework:new("audio.sound",																	-- create sounds object
 local manager = Framework:new("game.manager") 													-- Create a new game manager and add states.
 
 manager:addManagedState("title",
-						Framework:new("utils.stubscene", { name = "title page",targets = { start = "start game" }}),
-						{ start = "setup"})
+						Framework:new("utils.stubscene", { name = "title page",targets = { next = "start game" }}),
+						{ next = "setup"})
 
 manager:addManagedState("setup",
-						Framework:new("utils.stubscene", { name = "setup screen",targets = { play = "play game" }}),
-						{ play = "game" })
+						Framework:new("utils.stubscene", { name = "setup screen",targets = { next = "play game" }}),
+						{ next = "game" })
 
 manager:addManagedState("game",
 						Framework:new("scene.puzzle"),
 						{ win = "highscore", exit = "setup" })
 
 manager:addManagedState("highscore",
-						Framework:new("utils.stubscene", { name = "high score",targets = { exit = "setup screen" }}),
-						{ exit = "setup" })
+						Framework:new("utils.stubscene", { name = "high score",targets = { next = "setup screen" }}),
+						{ next = "setup" })
 
 local function facFunc(count) 
 	local a = {}
@@ -55,7 +56,7 @@ local function facFunc(count)
 end
 
 manager:start("game",{ factory = facFunc, 
- margin = 4, gridSize = 5, timeAllowed = 10, 
+ margin = 4, gridSize = 2, timeAllowed = 6, 
 			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
 			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
 
@@ -69,12 +70,12 @@ manager:start("game",{ factory = facFunc,
 --]]
 --- ************************************************************************************************************************************************************************
 
--- high score class, has score and associated data.
+-- text object utility for adding to scenes ?
 -- generic scene class, extend to delayed scene class and clickable scene class to progress.
 -- current & high score table (combining the two)
 -- gui design and implementation
 -- main setup screen (preserves state in offline storage)
 -- title screen (graphic exists) (use ApplicationVersion)
--- "use your own word list"
+-- ("use your own word list")
 
 -- the superclass thing for decoration ???? - mixin still needs same ?

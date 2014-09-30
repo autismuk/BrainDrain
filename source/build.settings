@@ -12,6 +12,10 @@ settings =
             {
                 publisherId = "com.coronalabs"
             },
+            ["plugin.pasteboard"] =
+            {
+                publisherId = "com.coronalabs",
+            },
         },      
 
     excludeFiles = 
