@@ -127,14 +127,19 @@ function PuzzleSceneManager:onMessage(sender,message,body)
 	body.difficulty = self.m_difficulty 														-- and the difficulty level.
 	body.score = math.floor(body.baseScore * body.difficulty / 100)								-- difficulty adjusted score.
 	self:setControllableEnabled(false)															-- turn off controllables.
+
 	local text = "TIME UP !"
 	if body.completed then text = "GOAL IN !" end 
-	local group = self:getScene():getContainer() 												-- get current scene's container
-	text = display.newBitmapText(group,text, 													-- put up text
-									display.contentWidth/2,-40,"badabb",display.contentWidth/4)
-	text:setTintColor(0,1,1)
-	transition.to(text, { time = 2000, y = display.contentHeight / 2, 							-- bounce it in.
-											transition = easing.outBounce })
+
+	self:getScene():new("control.text", { 
+						text = text, 
+						x = display.contentWidth /2 , y = -40,
+						font = "badabb",
+						tint = { r = 1, g = 1 , b = 0},
+						transition = { time = 2000, y = display.contentHeight/2, transition = easing.outBounce,
+									   onComplete = function(obj) end	}						-- stops auto deletion
+						})
+
 	timer.performWithDelay(4000,function() self:performGameEvent("win",body) end) 				-- after a time, switch to high score.
 end 
 

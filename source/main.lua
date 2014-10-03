@@ -76,10 +76,12 @@ local function facFunc(count)
 	return a 
 end
 
-manager:start("game",{ factory = facFunc, margin = 4, gridSize = 2, timeAllowed = 666, 
+
+manager:start("game",{ factory = facFunc, margin = 4, gridSize = 2, timeAllowed = 6, 
 			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
 			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
 
+--manager:start("highscore",{})
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -91,7 +93,7 @@ manager:start("game",{ factory = facFunc, margin = 4, gridSize = 2, timeAllowed 
 --]]
 --- ************************************************************************************************************************************************************************
 
--- exit high score table.
+-- admob open then close bug ? show/show/hide
 -- gui design and implementation (?)
 -- main setup screen (preserves state in offline storage)
 -- icon
