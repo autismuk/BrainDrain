@@ -17,7 +17,8 @@ ApplicationDescription = { 																		-- application description.
     admobIDs = 		{ 																			-- admob Identifiers.
     					ios = "ca-app-pub-8354094658055499/1659828014", 							
 						android = "ca-app-pub-8354094658055499/7706361613" 
-					}
+					},
+	showDebug = 	true 																		-- show debug info and adverts.
 }
 
 display.setStatusBar(display.HiddenStatusBar)													-- hide status bar.
@@ -78,8 +79,8 @@ manager:start("setup")
 
 -- create standard factories.
 -- show Debug information (removes advertising and the memory/texture thing)
--- TEST/Code Read
 -- Comments !
+-- TEST/Code Read
 -- "use your own word list" - get from clipboard as HTML
 -- icon
 -- testing

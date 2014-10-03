@@ -20,7 +20,7 @@ function HighScoreScene:constructor(info)
 		Framework.fw.highScoreTable:add(info.score, { difficulty = info.difficulty }) 			-- put into high score table
 	end
 	local fontSize = display.contentWidth / 8 													-- size of fonts.
-	local msg = (("00000"..info.score):sub(-6)) .. " (" .. math.floor(info.difficulty or 100) .. " %)" -- put up current score.
+	local msg = (("00000"..info.score):sub(-5)) .. " (" .. math.floor(info.difficulty or 100) .. " %)" -- put up current score.
 	if info.score == 0 then msg = "TIME UP !" end
 	local txt = display.newBitmapText(self.m_group,msg,display.contentWidth / 2, info.space + fontSize, "badabb", fontSize * 1.4)
 	txt:setModifier(FontManager.Modifiers.SimpleCurveModifier:new(nil,nil,0.4,nil)):animate(3):setTintColor(1,1,0)
@@ -34,7 +34,7 @@ function HighScoreScene:constructor(info)
 		self.m_textList[#self.m_textList+1] =txt
 		local score,data = Framework.fw.highScoreTable:get(n)
 		if score > 0 then
-			txt = display.newBitmapText(newGroup,("00000"..score):sub(-6),display.contentWidth * 0.47,y,"badabb",fontSize):setTintColor(0,1,0)
+			txt = display.newBitmapText(newGroup,("00000"..score):sub(-5),display.contentWidth * 0.47,y,"badabb",fontSize):setTintColor(0,1,0)
 			self.m_textList[#self.m_textList+1] =txt
 			txt = display.newBitmapText(newGroup,(data.difficulty or 100) .. "%",display.contentWidth * 0.8,y,"badabb",fontSize):setTintColor(0,0.5,1)
 			self.m_textList[#self.m_textList+1] =txt
