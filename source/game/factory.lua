@@ -17,15 +17,11 @@ function FactorySourceClass:destructor() end
 
 local facFunc = {}
 
-function facFunc:count() return 25 end 
+function facFunc:count() return 222 end 
 
 function facFunc:get(count) 
 	local a = {}
 	for i = 1,count do a[i] = i end
-	a[4] = "4hello"
-	a[5] = "5cat"
-	a[6] = "6terrible"
-	a[9] = "9another"
 	return a 
 end
 

@@ -112,20 +112,21 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 											end)
 									 end }
 	})
-	self:tag("puzzleSceneManager")																-- tag it.
+	self:tag("puzzleSceneManager")																-- tag it (may be already tagged as such, doesn't matter.)
 	scene:new("audio.music") 																	-- start the background music.
 	return scene
 end 
 
 function PuzzleSceneManager:onMessage(sender,message,body)
 	if message == "iconbutton" then 															-- there is only one icon button message
+		self:cancelTimer("complete")															-- cancel any pending completions.
 		self:performGameEvent("exit",{}) 														-- so if clicked go back to the main screen
 		return 
 	end
 	body.baseScore = Framework.fw.timer:getSecondsRemaining()									-- copy in the body score
 	if not body.completed then body.baseScore = 0 end 											-- score nothing if did not complete.
 	body.difficulty = self.m_difficulty 														-- and the difficulty level.
-	body.score = math.floor(body.baseScore * body.difficulty / 100)								-- difficulty adjusted score.
+	body.score = math.floor(body.baseScore * body.difficulty / 100)	* 10						-- difficulty adjusted score.
 	self:setControllableEnabled(false)															-- turn off controllables.
 
 	local text = "TIME UP !"
@@ -140,7 +141,12 @@ function PuzzleSceneManager:onMessage(sender,message,body)
 									   onComplete = function(obj) end	}						-- stops auto deletion
 						})
 
-	timer.performWithDelay(4000,function() self:performGameEvent("win",body) end) 				-- after a time, switch to high score.
+	self.m_result = body 																		-- save the output in a reference
+	self:addSingleTimer(4,"complete") 															-- send it in four seconds.
+end 
+
+function PuzzleSceneManager:onTimer(tag)
+	self:performGameEvent("win",self.m_result)													-- after a time, switch to high score with the saved data
 end 
 
 function PuzzleSceneManager:applyDefaults(def)
