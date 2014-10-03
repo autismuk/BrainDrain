@@ -13,7 +13,11 @@ ApplicationDescription = { 																		-- application description.
 	version = 		"0.1",
 	developers = 	{ "Paul Robson" },
 	email = 		"paul@robsons.org.uk",
-	fqdn = 			"uk.org.robsons.brainwash" 													-- must be unique for each application.
+	fqdn = 			"uk.org.robsons.brainwash", 												-- must be unique for each application.
+    admobIDs = 		{ 																			-- admob Identifiers.
+    					ios = "ca-app-pub-8354094658055499/1659828014", 							
+						android = "ca-app-pub-8354094658055499/7706361613" 
+					}
 }
 
 display.setStatusBar(display.HiddenStatusBar)													-- hide status bar.
@@ -24,6 +28,7 @@ require("utils.stubscene")																		-- temporary stub scenes for FSM
 require("utils.sound")																			-- sfx singleton
 require("scene.puzzle") 																		-- puzzle scene code.
 require("utils.simplescene")
+require("scene.highscore")
 
 Framework:new("audio.sound",																	-- create sounds object, not much in this game.
 					{ sounds = { "correct","wrong" } })
@@ -58,7 +63,7 @@ manager:addManagedState("game",
 						{ win = "highscore", exit = "setup" })
 
 manager:addManagedState("highscore",
-						Framework:new("utils.stubscene", { name = "high score",targets = { next = "setup screen" }}),
+						Framework:new("scene.highscore"),
 						{ next = "setup" })
 
 local function facFunc(count) 
@@ -71,10 +76,10 @@ local function facFunc(count)
 	return a 
 end
 
-manager:start("game",{ factory = facFunc, 
- margin = 4, gridSize = 7, timeAllowed = 6, 
+manager:start("game",{ factory = facFunc, margin = 4, gridSize = 2, timeAllowed = 666, 
 			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
 			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
+
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -86,7 +91,7 @@ manager:start("game",{ factory = facFunc,
 --]]
 --- ************************************************************************************************************************************************************************
 
--- current & high score table (combining the two)
+-- exit high score table.
 -- gui design and implementation (?)
 -- main setup screen (preserves state in offline storage)
 -- icon

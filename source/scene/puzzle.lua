@@ -86,9 +86,8 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 	self:applyDefaults(data)																	-- defaults
 	self.m_difficulty = self:calculateDifficulty(data) 											-- calculate difficulty as percentage
 	local scene = Framework:new("game.scene")
-	local adIDs = { ios = "ca-app-pub-8354094658055499/1659828014", 							-- admob identifiers.
-					android = "ca-app-pub-8354094658055499/7706361613" }
-	scene.m_advertObject = scene:new("ads.admob",adIDs)											-- create a new advert object
+
+	scene.m_advertObject = scene:new("ads.admob",ApplicationDescription.admobIDs)				-- create a new advert object
 	data.headerSpace = scene.m_advertObject:getHeight() 										-- get the advert object height
 
 	scene:new("scene.puzzle.scenebackground",data)												-- create the background objects.
