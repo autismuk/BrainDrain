@@ -19,7 +19,6 @@ function HighScoreScene:constructor(info)
 	if info.score > 0 then
 		Framework.fw.highScoreTable:add(info.score, { difficulty = info.difficulty }) 			-- put into high score table
 	end
-	print("NOTE: insert into high score table disabled.")
 	local fontSize = display.contentWidth / 8 													-- size of fonts.
 	local msg = (("00000"..info.score):sub(-6)) .. " (" .. math.floor(info.difficulty or 100) .. " %)" -- put up current score.
 	if info.score == 0 then msg = "TIME UP !" end

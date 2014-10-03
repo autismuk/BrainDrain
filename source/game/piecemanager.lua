@@ -23,7 +23,8 @@ function PieceManager:constructor(info)
 	
 	self.m_pieceList = {} 															-- array of pieces, in order.
 	self.m_displayList = {}
-	local valueList = info.factory(info.gridSize * info.gridSize)					-- list of values
+
+	local valueList = info.factory:get(info.gridSize * info.gridSize)				-- list of values
 
 	if info.isReversed then 														-- if reversed, just reverse the list of values.
 		local oldList = valueList 

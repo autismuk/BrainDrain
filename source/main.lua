@@ -22,13 +22,12 @@ ApplicationDescription = { 																		-- application description.
 
 display.setStatusBar(display.HiddenStatusBar)													-- hide status bar.
 require("strict")																				-- install strict.lua to track globals etc.
-
 require("framework.framework")																	-- framework.
-require("utils.stubscene")																		-- temporary stub scenes for FSM
 require("utils.sound")																			-- sfx singleton
 require("scene.puzzle") 																		-- puzzle scene code.
 require("utils.simplescene")
 require("scene.highscore")
+require("scene.setup")
 
 Framework:new("audio.sound",																	-- create sounds object, not much in this game.
 					{ sounds = { "correct","wrong" } })
@@ -37,14 +36,12 @@ Framework:new("audio.sound",																	-- create sounds object, not much i
 local manager = Framework:new("game.manager") 													-- Create a new game manager and then add states.
 
 manager:addManagedState("title",
-						Framework:new("scene.simple.touch",{
+						Framework:new("scene.simple.timed",{
 							creator = function(group,scene,manager)
 								local background = display.newRect(group,0,0,					-- mosaic background
 															display.contentWidth,display.contentHeight)
 								background.anchorX,background.anchorY = 0,0
-								display.setDefault("textureWrapX","repeat")
-								display.setDefault("textureWrapY","repeat")
-								background.fill = { type = "image", filename = "images/mosaict.jpg" }
+								background:setFillColor(0,0,0.5)
 								background.fill.scaleX,background.fill.scaleY = 0.2,0.15	
 								local image = display.newImage(group,"images/title.png",0,0)
 								image.anchorX,image.anchorY = 0,0
@@ -55,7 +52,7 @@ manager:addManagedState("title",
 						{ next = "setup"})
 
 manager:addManagedState("setup",
-						Framework:new("utils.stubscene", { name = "setup screen",targets = { next = "play game" }}),
+						Framework:new("scene.setup",{}),
 						{ next = "game" })
 
 manager:addManagedState("game",
@@ -66,22 +63,7 @@ manager:addManagedState("highscore",
 						Framework:new("scene.highscore"),
 						{ next = "setup" })
 
-local function facFunc(count) 
-	local a = {}
-	for i = 1,count do a[i] = i end
-	a[4] = "4hello"
-	a[5] = "5cat"
-	a[6] = "6terrible"
-	a[9] = "9another"
-	return a 
-end
-
-
-manager:start("game",{ factory = facFunc, margin = 4, gridSize = 2, timeAllowed = 6, 
-			 		   isReversed = false, isShuffling = true, isRotating = true, isChangingBackground = true, 
-			 		   isVerticallyMirrored = false, isHorizontallyMirrored = false, isHard = true })
-
---manager:start("highscore",{})
+manager:start("title")
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -93,11 +75,13 @@ manager:start("game",{ factory = facFunc, margin = 4, gridSize = 2, timeAllowed 
 --]]
 --- ************************************************************************************************************************************************************************
 
--- gui design and implementation (?)
--- main setup screen (preserves state in offline storage)
+
+-- create standard factories.
+-- TEST/Code Read
+-- Comments !
+-- "use your own word list" - get from clipboard as HTML
 -- icon
 -- testing
--- ("use your own word list")
 
 -- the superclass thing for decoration ???? - mixin still needs same ?
 -- extended transition system.
