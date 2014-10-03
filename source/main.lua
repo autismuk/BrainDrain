@@ -93,7 +93,6 @@ manager:start("game",{ factory = facFunc, margin = 4, gridSize = 2, timeAllowed 
 --]]
 --- ************************************************************************************************************************************************************************
 
--- admob open then close bug ? show/show/hide
 -- gui design and implementation (?)
 -- main setup screen (preserves state in offline storage)
 -- icon
