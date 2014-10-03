@@ -78,7 +78,6 @@ manager:start("setup")
 
 -- create standard factories.
 -- show Debug information (removes advertising and the memory/texture thing)
--- BUG: completing *then* clicking home causes a crash "Unknown event win for state setup"
 -- TEST/Code Read
 -- Comments !
 -- "use your own word list" - get from clipboard as HTML
