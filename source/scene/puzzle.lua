@@ -27,14 +27,14 @@ function PuzzleScene:constructor(info)
 	background.fill = { type = "image", filename = "images/mosaicb.jpg" }
 	background.fill.scaleX,background.fill.scaleY = 0.2,0.15
 	local frame = display.newRoundedRect(self.m_group,											-- timer bar background
-						display.contentWidth * 0.2,display.contentHeight * 0.95,
+						display.contentWidth * 0.2,display.contentHeight * 0.92,
 						display.contentWidth * 0.6,display.contentHeight * 0.05,
 						display.contentHeight * 0.05/2)
 	frame.anchorX,frame.anchorY = 0,0.5
 	frame:setFillColor(0,0.5,0.7)
 	
 	self.m_timerBar = display.newRoundedRect(self.m_group,										-- timer bar
-						display.contentWidth * 0.2,display.contentHeight * 0.95,
+						display.contentWidth * 0.2,display.contentHeight * 0.92,
 						display.contentWidth * 0.6,display.contentHeight * 0.05,
 						display.contentHeight * 0.05/2)
 	self.m_timerBar.anchorX,self.m_timerBar.anchorY = 0,0.5
