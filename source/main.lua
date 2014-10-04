@@ -37,17 +37,29 @@ Framework:new("audio.sound",																	-- create sounds object, not much i
 local manager = Framework:new("game.manager") 													-- Create a new game manager and then add states.
 
 manager:addManagedState("title",
-						Framework:new("scene.simple.timed",{
-							creator = function(group,scene,manager)
-								local background = display.newRect(group,0,0,					-- mosaic background
-															display.contentWidth,display.contentHeight)
-								background.anchorX,background.anchorY = 0,0
-								background:setFillColor(0,0,0.5)
-								background.fill.scaleX,background.fill.scaleY = 0.2,0.15	
-								local image = display.newImage(group,"images/title.png",0,0)
-								image.anchorX,image.anchorY = 0,0
+						Framework:new("scene.simple.touch",{
+							constructor = function(storage,group,scene,manager)
+								local r = display.newRect(group,0,0,display.contentWidth,display.contentHeight)
+								r.anchorX,r.anchorY = 0,0 r.alpha = 0
 								local ver = display.newText(group,"v"..ApplicationDescription.version,0,0,system.nativeFont,10)
 								ver.anchorX,ver.anchorY = 0,0 ver:setFillColor(0,1,0)
+								storage.t1 = display.newBitmapText(group,"BRAINWASH",display.contentWidth/2,display.contentHeight * 0.2,"badabb",display.contentWidth/3.5):setTintColor(1,1,0)
+								storage.t2 = display.newBitmapText(group,"TRAIN YOUR BRAIN!",display.contentWidth/2,display.contentHeight * 0.55,"badabb",display.contentWidth/7):setTintColor(1,0.5,0)
+								storage.t3 = display.newBitmapText(group,"WRITTEN BY PAUL ROBSON (C) 2014",display.contentWidth/2,display.contentHeight * 0.9,"badabb",display.contentWidth/12):setTintColor(0,0.5,1)
+								storage.t1:setModifier("scale"):animate(3)
+								storage.t2:setModifier(	function(modifier, cPos, info)
+															local w = math.floor(info.elapsed/720) % info.wordCount + 1 									
+															if info.wordIndex == w then  																		
+																	local newScale = 1 + (info.elapsed/2 % 360) / 360 / 2										
+																	modifier.xScale,modifier.yScale = newScale,newScale 									
+															end
+														end):animate()
+								storage.t3:setModifier("wobble")
+							end,
+							destructor = function(storage,group,scene,manager)
+								storage.t1:removeSelf()
+								storage.t2:removeSelf()
+								storage.t3:removeSelf()
 							end
 						}),
 						{ next = "setup"})
@@ -64,7 +76,7 @@ manager:addManagedState("highscore",
 						Framework:new("scene.highscore"),
 						{ next = "setup" })
 
-manager:start("setup")
+manager:start("title")
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -78,7 +90,6 @@ manager:start("setup")
 
 -- Comments !
 -- create standard factories.
--- replace title screen which looks horrible.
 -- TEST/Code Read
 -- "use your own word list" - get from clipboard as HTML
 -- icon
