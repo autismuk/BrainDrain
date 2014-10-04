@@ -15,8 +15,8 @@ ApplicationDescription = { 																		-- application description.
 	email = 		"paul@robsons.org.uk",
 	fqdn = 			"uk.org.robsons.brainwash", 												-- must be unique for each application.
     admobIDs = 		{ 																			-- admob Identifiers.
-    					ios = "ca-app-pub-8354094658055499/1659828014", 							
-						android = "ca-app-pub-8354094658055499/7706361613" 
+    					ios = "ca-app-pub-8354094658055499/1749592813", 							
+						android = "ca-app-pub-8354094658055499/1609992011"
 					},
 	showDebug = 	true 																		-- show debug info and adverts.
 }
@@ -76,10 +76,9 @@ manager:start("setup")
 --]]
 --- ************************************************************************************************************************************************************************
 
-
--- create standard factories.
--- show Debug information (removes advertising and the memory/texture thing)
 -- Comments !
+-- create standard factories.
+-- replace title screen which looks horrible.
 -- TEST/Code Read
 -- "use your own word list" - get from clipboard as HTML
 -- icon
