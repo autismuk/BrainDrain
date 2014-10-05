@@ -30,6 +30,10 @@ require("utils.simplescene")
 require("scene.highscore")
 require("scene.setup")
 
+--- ************************************************************************************************************************************************************************
+--																				Start Up
+--- ************************************************************************************************************************************************************************
+
 Framework:new("audio.sound",																	-- create sounds object, not much in this game.
 					{ sounds = { "correct","wrong" } })
 
@@ -38,7 +42,7 @@ local manager = Framework:new("game.manager") 													-- Create a new game 
 
 manager:addManagedState("title",
 						Framework:new("scene.simple.touch",{
-							constructor = function(storage,group,scene,manager)
+							constructor = function(storage,group,scene,manager)					-- just create some animated bitmap headings.
 								local r = display.newRect(group,0,0,display.contentWidth,display.contentHeight)
 								r.anchorX,r.anchorY = 0,0 r.alpha = 0
 								local ver = display.newText(group,"v"..ApplicationDescription.version,0,0,system.nativeFont,10)
@@ -64,19 +68,19 @@ manager:addManagedState("title",
 						}),
 						{ next = "setup"})
 
-manager:addManagedState("setup",
+manager:addManagedState("setup",																-- set up scene
 						Framework:new("scene.setup",{}),
 						{ next = "game" })
 
-manager:addManagedState("game",
+manager:addManagedState("game",																	-- actual game scene
 						Framework:new("scene.puzzle"),
 						{ win = "highscore", exit = "setup" })
 
-manager:addManagedState("highscore",
+manager:addManagedState("highscore",															-- high score scene
 						Framework:new("scene.highscore"),
 						{ next = "setup" })
 
-manager:start("setup")
+manager:start("setup") 																			-- and start.
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -88,8 +92,6 @@ manager:start("setup")
 --]]
 --- ************************************************************************************************************************************************************************
 
-
--- test on text not index, allow for duplication.
 -- create standard factories.
 -- Comments !
 -- TEST/Code Read
