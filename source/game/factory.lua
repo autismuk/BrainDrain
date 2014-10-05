@@ -9,6 +9,8 @@
 ---
 --- ************************************************************************************************************************************************************************
 
+require("game.usertext")
+
 --- ************************************************************************************************************************************************************************
 --															Number outputting factory, can do steps of one or with gaps.
 --- ************************************************************************************************************************************************************************
@@ -79,21 +81,21 @@ local FactorySourceClass = Framework:createClass("game.factorysource")
 function FactorySourceClass:constructor(info) end 
 function FactorySourceClass:destructor() end
 
-
---//	Get a factory as required. 1 = Numbers, 2 = Alphabet, 3 = Numbers with Gaps, 4 = Three Letter Words, 5 = Top 500, 6 = User Defined.
+--//	Get a factory as required. 1 = Numbers, 2 = Alphabet, 3 = Numbers with Gaps, 4 = Letters with Gaps, 5 = Three Letter Words, 6 = Top 500, 
+--// 	7 = User Defined (sequential), 8 = User defined (spaces)
 --//	@type 	[number]		factory type - see the "items" selector in setup.lua - this value is its index.
 --//	@return [object] 		factory with count() and get() methods.
 
 function FactorySourceClass:getFactory(type) 
-	print(type)
+
 	if type == 1 then return Framework:new("game.factory.numbers", { spacing = false }) end
 	if type == 2 then return Framework:new("game.factory.words", { list = WordFactory.alphabet }) end
 	if type == 3 then return Framework:new("game.factory.numbers", { spacing = true }) end
 	if type == 4 then return Framework:new("game.factory.words.spaced", { list = WordFactory.alphabet }) end
 	if type == 5 then return Framework:new("game.factory.words.spaced", { list = WordFactory.threeLetters }) end
 	if type == 6 then return Framework:new("game.factory.words.spaced", { list = WordFactory.top500 }) end
-	if type == 7 then return Framework:new("game.factory.words", { list = WordFactory.xanadu }) end
-	if type == 8 then return Framework:new("game.factory.words.spaced", { list = WordFactory.xanadu }) end
+	if type == 7 then return Framework:new("game.factory.words", { list = Framework.fw.usertext:getSplit() }) end
+	if type == 8 then return Framework:new("game.factory.words.spaced", { list = Framework.fw.usertext:getSplit() }) end
 	return facFunc 
 end 
 
@@ -131,16 +133,11 @@ WordFactory.top500 = { "the","name","of","very","to","through","and","just","for
 					   "shape","early","yes","hold","hot","west","miss","ground","brought","interest","heat","reach","snow","fast","bed","five","bring","sing","sit","listen",
 					   "perhaps","six","fill","table","east","travel","weight","less","language","morning","among" }
 
-WordFactory.xanadu = { "in","xanadu","did","kubla","khan","a","stately","pleasure","dome","decree","where","alph","the","sacred","river","ran","through","caverns",
-					   "measureless","to","man","down","to","a","sunless","sea","so","twice","five","miles","of","fertile","ground","with","walls","and","towers",
-					   "were","girdled","round","and","there","were","gardens","bright","with","sinuous","rills","where" }
 
 table.sort(WordFactory.top500)							 
 table.sort(WordFactory.alphabet)							 
 table.sort(WordFactory.threeLetters)		
-print(#WordFactory.xanadu)					 
--- No, we don't sort Samuel Taylor Coleridge :)
-
+					 
 --- ************************************************************************************************************************************************************************
 --[[
 

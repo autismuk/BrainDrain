@@ -92,6 +92,8 @@ manager:start("setup") 																			-- and start.
 --]]
 --- ************************************************************************************************************************************************************************
 
+-- put Xanadu back as sentence
+-- write code to split it up, read default in.
 -- TEST/Code Read
 -- "use your own word list" - get from clipboard as HTML
 -- icon
