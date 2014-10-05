@@ -92,8 +92,6 @@ manager:start("setup") 																			-- and start.
 --]]
 --- ************************************************************************************************************************************************************************
 
--- create standard factories.
--- Comments !
 -- TEST/Code Read
 -- "use your own word list" - get from clipboard as HTML
 -- icon

@@ -48,7 +48,6 @@ function Piece:constructor(info)
 	if self.m_info.isHorizontallyMirrored then 										-- right to left, if requried
 		text.xScale = -text.xScale 
 	end
-	self.m_group.alpha = 1 															-- can't be seen initially 
 	self:changeBackground()															-- pick random background
 	self:tag("piece")																-- tag as piece
 	self.m_group:addEventListener("tap",self)										-- listen for taps.
@@ -72,6 +71,7 @@ function Piece:tap(e)
 								{ index = self.m_index, text = self.m_text })			
 		end
 	end
+	return true
 end 
 
 --//	This animates the piece removal, and eventually displays a particle effect
