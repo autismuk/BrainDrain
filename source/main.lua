@@ -29,6 +29,7 @@ require("scene.puzzle") 																		-- puzzle scene code.
 require("utils.simplescene")
 require("scene.highscore")
 require("scene.setup")
+require("utils.stubscene")
 
 --- ************************************************************************************************************************************************************************
 --																				Start Up
@@ -70,7 +71,11 @@ manager:addManagedState("title",
 
 manager:addManagedState("setup",																-- set up scene
 						Framework:new("scene.setup",{}),
-						{ next = "game" })
+						{ next = "game", edit = "editor" })
+
+manager:addManagedState("editor",
+						Framework:new("utils.stubscene",{ name = "editor",targets = { next = "Back to setup"}}),
+						{ next = "setup"})
 
 manager:addManagedState("game",																	-- actual game scene
 						Framework:new("scene.puzzle"),
@@ -80,7 +85,7 @@ manager:addManagedState("highscore",															-- high score scene
 						Framework:new("scene.highscore"),
 						{ next = "setup" })
 
-manager:start("setup") 																			-- and start.
+manager:start("editor") 																			-- and start.
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -92,10 +97,9 @@ manager:start("setup") 																			-- and start.
 --]]
 --- ************************************************************************************************************************************************************************
 
--- put Xanadu back as sentence
--- write code to split it up, read default in.
+-- icon for editor , check backwards and forwards
+-- implement actual code editor
 -- TEST/Code Read
--- "use your own word list" - get from clipboard as HTML
 -- icon
 -- testing
 
