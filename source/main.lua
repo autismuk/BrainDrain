@@ -76,7 +76,7 @@ manager:addManagedState("highscore",
 						Framework:new("scene.highscore"),
 						{ next = "setup" })
 
-manager:start("title")
+manager:start("setup")
 
 --- ************************************************************************************************************************************************************************
 --[[
@@ -88,8 +88,10 @@ manager:start("title")
 --]]
 --- ************************************************************************************************************************************************************************
 
--- Comments !
+
+-- test on text not index, allow for duplication.
 -- create standard factories.
+-- Comments !
 -- TEST/Code Read
 -- "use your own word list" - get from clipboard as HTML
 -- icon

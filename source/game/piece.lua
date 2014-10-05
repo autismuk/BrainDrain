@@ -24,6 +24,7 @@ function Piece:constructor(info)
 	self.m_group.x,self.m_group.y = info.centre.x,info.centre.y
 	self.m_piece.strokeWidth = 2
 	self.m_piece:setFillColor(0,0,0) self.m_piece:setStrokeColor(0,0.5,1)
+	self.m_text = info.textValue
 	local text = display.newText(self.m_group,info.textValue,0,0,					-- fill text
 													native.systemFont,info.gridPixelSize/2)
 
@@ -53,7 +54,8 @@ end
 function Piece:tap(e)
 	if self:isAlive() and not self.m_hasBeenKilled then 							-- if still active.
 		if self:isEnabled() then 													-- and it has been enabled
-			self:sendMessage("pieceManager","tap",{ index = self.m_index })			-- tapped, send message to manager about this.
+			self:sendMessage("pieceManager","tap",									-- tapped, send message to manager about this.
+								{ index = self.m_index, text = self.m_text })			
 		end
 	end
 end 

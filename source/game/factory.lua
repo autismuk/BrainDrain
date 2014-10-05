@@ -22,6 +22,7 @@ function facFunc:count() return 222 end
 function facFunc:get(count) 
 	local a = {}
 	for i = 1,count do a[i] = i end
+	a[2] = 'x' a[3] = a[2] a[4] = a[2]
 	return a 
 end
 
