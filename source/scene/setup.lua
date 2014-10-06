@@ -127,6 +127,7 @@ function SetupSceneManager:preOpen(manager,data,resources)
 	scene:new("control.rightarrow", { x = 90, r = 1, g = 0.5, b = 0, 							-- add right arrow to go to game.
 													listener = self, message = "start" })
 	scene:new("control.user.edit", { x = 10,listener = self,message = "edit" })
+	self.m_factorySource = scene:new("game.factorySource",{})									-- add a factory source non visible
 	return scene
 end 
 
@@ -154,7 +155,7 @@ function SetupSceneManager:onMessage(sender,name,body)
 			 		   		isHorizontallyMirrored = (setup.horizmirror == 2), 
 			 		   		isHard = (setup.hard == 2) }
 
-	descriptor.factory = self:getScene():new("game.factorySource"):getFactory(setup.items) 		-- create a factory source, use it to get item factory
+	descriptor.factory = self.m_factorySource:getFactory(setup.items) 							-- use the factory source to get the item factory
 
 	if descriptor.gridSize * descriptor.gridSize <= descriptor.factory:count() then 			-- if enough then start game using the descriptor to specify it
 		self:performGameEvent("next",descriptor)

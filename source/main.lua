@@ -97,10 +97,9 @@ manager:start("editor") 																		-- and start.
 --]]
 --- ************************************************************************************************************************************************************************
 
--- icon for editor , check backwards and forwards
 -- implement actual code editor
--- TEST/Code Read
--- icon
+-- lossy object count (creating factory every time)
+-- TEST/Code Read, remove document store first.
 -- testing
 
 -- the superclass thing for decoration ???? - mixin still needs same ?

@@ -9,6 +9,7 @@
 --- ************************************************************************************************************************************************************************
 
 require("game.usertext")
+
 --- ************************************************************************************************************************************************************************
 --//															Scene responsible for editor scene
 --- ************************************************************************************************************************************************************************
@@ -20,20 +21,27 @@ local EditorScene = Framework:createClass("scene.editor.main")
 
 function EditorScene:constructor(info)
 	self.m_group = display.newGroup() 												-- group for graphic objects.
-	local r = display.newRect(self.m_group,0,0,display.contentWidth,display.contentHeight)
+	local r = display.newRect(self.m_group,0,0,										-- background rectangle
+										display.contentWidth,display.contentHeight)
 	r.anchorX,r.anchorY = 0,0 r:setFillColor(0.4,0.4,0.4)
+																					-- editing box (cannot be part of group)
 	self.m_textBox = native.newTextBox(display.contentWidth*0.45, display.contentHeight*0.27,
 									   display.contentWidth*0.82,display.contentHeight*0.5)
-	self.m_textBox.isEditable = true
+	self.m_textBox.isEditable = true 												-- can now be edited.
+																					-- framing rectangle
 	local r2 = display.newRect(self.m_group,display.contentWidth*0.45, display.contentHeight*0.27,
 									   display.contentWidth*0.84,display.contentHeight*0.52)
 	r2:setFillColor(0,0,0)
-	native.setKeyboardFocus(self.m_textBox)
+	native.setKeyboardFocus(self.m_textBox)											-- bring up keyboard dialogue
 
-	self.m_textBox.text = Framework.fw.usertext:get().."\nHello world"
+	self.m_textBox.text = Framework.fw.usertext:get()								-- load text in
+	self.m_textBox.size = display.contentWidth / 16 								-- increase font readability
 end 
 
+--//	Tidy up on scene exit
+
 function EditorScene:destructor() 
+	Framework.fw.usertext:set(self.m_textBox.text)									-- copy text back.
 	self.m_group:removeSelf() 														-- remove graphics
 	self.m_textBox:removeSelf()
 	self.m_group = nil self.m_textBox = nil
@@ -72,7 +80,6 @@ end
 function EditorSceneManager:onMessage(sender,name,body)
 
 	assert(name == "iconbutton" and body.type == "start")										-- check it's the start message
-
 	self:performGameEvent("next")
 end
 
@@ -85,4 +92,3 @@ end
 
 --]]
 --- ************************************************************************************************************************************************************************
-
