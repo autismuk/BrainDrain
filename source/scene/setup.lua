@@ -55,6 +55,17 @@ function SetupSelector:tap()
 end 
 
 --- ************************************************************************************************************************************************************************
+--	 																		Edit Button
+--- ************************************************************************************************************************************************************************
+
+local EditButton = Framework:createClass("control.user.edit","control.abstract")
+
+function EditButton:draw(colour)
+	local img = display.newImage(self.m_group,"images/edit.png",0,0)
+	img.width = 30 img.height = 40
+end 
+
+--- ************************************************************************************************************************************************************************
 --//															Scene responsible for  setup scene
 --- ************************************************************************************************************************************************************************
 
@@ -115,6 +126,7 @@ function SetupSceneManager:preOpen(manager,data,resources)
 	scene:new("scene.setup.main",{ top = header, bottom = display.contentHeight * 0.85 }) 		-- set up the setup scene
 	scene:new("control.rightarrow", { x = 90, r = 1, g = 0.5, b = 0, 							-- add right arrow to go to game.
 													listener = self, message = "start" })
+	scene:new("control.user.edit", { x = 10,listener = self,message = "edit" })
 	return scene
 end 
 
@@ -123,8 +135,14 @@ end
 --//	@body 		[table]			anything else
 
 function SetupSceneManager:onMessage(sender,name,body)
+	assert(name == "iconbutton")																-- check it's an icon button, it should be.
 
-	assert(name == "iconbutton" and body.type == "start")										-- check it's the start message
+	if body.type == "edit" then 																-- if it's the edit button, then go to the edit scene.
+		self:performGameEvent("edit")
+		return 
+	end
+
+	assert(body.type == "start")																-- check it's the start message
 	local setup = Framework.fw.documentStore:access().settings 									-- access settings
 
 	local descriptor = { 	gridSize = setup.gridsize + 1,										-- copy settings into descriptor table.

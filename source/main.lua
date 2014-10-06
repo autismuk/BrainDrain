@@ -29,7 +29,7 @@ require("scene.puzzle") 																		-- puzzle scene code.
 require("utils.simplescene")
 require("scene.highscore")
 require("scene.setup")
-require("utils.stubscene")
+require("scene.editor")
 
 --- ************************************************************************************************************************************************************************
 --																				Start Up
@@ -48,7 +48,7 @@ manager:addManagedState("title",
 								r.anchorX,r.anchorY = 0,0 r.alpha = 0
 								local ver = display.newText(group,"v"..ApplicationDescription.version,0,0,system.nativeFont,10)
 								ver.anchorX,ver.anchorY = 0,0 ver:setFillColor(0,1,0)
-								storage.t1 = display.newBitmapText(group,"BRAINWASH",display.contentWidth/2,display.contentHeight * 0.2,"badabb",display.contentWidth/3.5):setTintColor(1,1,0)
+								storage.t1 = display.newBitmapText(group,"BRAINDRAIN",display.contentWidth/2,display.contentHeight * 0.2,"badabb",display.contentWidth/3.5):setTintColor(1,1,0)
 								storage.t2 = display.newBitmapText(group,"TRAIN YOUR BRAIN!",display.contentWidth/2,display.contentHeight * 0.55,"badabb",display.contentWidth/7):setTintColor(1,0.5,0)
 								storage.t3 = display.newBitmapText(group,"WRITTEN BY PAUL ROBSON (C) 2014",display.contentWidth/2,display.contentHeight * 0.9,"badabb",display.contentWidth/12):setTintColor(0,0.5,1)
 								storage.t1:setModifier("scale"):animate(3)
@@ -74,7 +74,7 @@ manager:addManagedState("setup",																-- set up scene
 						{ next = "game", edit = "editor" })
 
 manager:addManagedState("editor",
-						Framework:new("utils.stubscene",{ name = "editor",targets = { next = "Back to setup"}}),
+						Framework:new("scene.editor",{}),
 						{ next = "setup"})
 
 manager:addManagedState("game",																	-- actual game scene
@@ -85,7 +85,7 @@ manager:addManagedState("highscore",															-- high score scene
 						Framework:new("scene.highscore"),
 						{ next = "setup" })
 
-manager:start("editor") 																			-- and start.
+manager:start("setup") 																			-- and start.
 
 --- ************************************************************************************************************************************************************************
 --[[
