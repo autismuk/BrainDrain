@@ -85,7 +85,7 @@ manager:addManagedState("highscore",															-- high score scene
 						Framework:new("scene.highscore"),
 						{ next = "setup" })
 
-manager:start("setup") 																			-- and start.
+manager:start("editor") 																		-- and start.
 
 --- ************************************************************************************************************************************************************************
 --[[
