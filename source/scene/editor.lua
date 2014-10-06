@@ -42,8 +42,9 @@ end
 
 function EditorScene:destructor() 
 	Framework.fw.usertext:set(self.m_textBox.text)									-- copy text back.
+	native.setKeyboardFocus(nil)													-- hide keyboard
 	self.m_group:removeSelf() 														-- remove graphics
-	self.m_textBox:removeSelf()
+	self.m_textBox:removeSelf()	 													-- remove edit box.
 	self.m_group = nil self.m_textBox = nil
 end 
 
