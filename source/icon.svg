@@ -5,6 +5,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    viewBox="0 0 512 512"
@@ -44,13 +45,13 @@
      inkscape:window-height="1211"
      id="namedview28"
      showgrid="false"
-     inkscape:zoom="1.463814"
-     inkscape:cx="304.37509"
-     inkscape:cy="304.77095"
+     inkscape:zoom="2.0701456"
+     inkscape:cx="299.49387"
+     inkscape:cy="297.94231"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="svg2"
      showguides="false">
     <inkscape:grid
        type="xygrid"
@@ -90,86 +91,51 @@
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Graphic">
-    <rect
-       inkscape:tile-y0="144.46696"
-       inkscape:tile-x0="102.47204"
-       ry="10.126039"
-       y="112.56007"
-       x="117.57269"
-       height="88.884056"
-       width="89.977791"
-       id="use3828"
-       style="fill-opacity:1;stroke:#ffffff;stroke-width:6;stroke-opacity:1" />
-    <rect
-       inkscape:tile-y0="144.46696"
-       inkscape:tile-x0="102.47204"
-       ry="10.126039"
-       y="112.56007"
-       x="216.3774"
-       height="88.884056"
-       width="89.977791"
-       id="use3834"
-       style="fill-opacity:1;stroke:#ffffff;stroke-width:6;stroke-opacity:1" />
-    <rect
-       inkscape:tile-y0="144.46696"
-       inkscape:tile-x0="102.47204"
-       ry="10.126039"
-       y="112.56007"
-       x="315.18213"
-       height="88.884056"
-       width="89.977791"
-       id="use3840"
-       style="fill-opacity:1;stroke:#ffffff;stroke-width:6;stroke-opacity:1" />
-    <rect
-       inkscape:tile-y0="144.46696"
-       inkscape:tile-x0="102.47204"
-       ry="10.126039"
-       y="209.88251"
-       x="117.57269"
-       height="88.884056"
-       width="89.977791"
-       id="use3867"
-       style="fill-opacity:1;stroke:#ffffff;stroke-width:6;stroke-opacity:1" />
-    <rect
-       inkscape:tile-y0="144.46696"
-       inkscape:tile-x0="102.47204"
-       ry="10.126039"
-       y="209.88251"
-       x="216.3774"
-       height="88.884056"
-       width="89.977791"
-       id="use3869"
-       style="fill-opacity:1;stroke:#ffffff;stroke-width:6;stroke-opacity:1" />
-    <rect
-       inkscape:tile-y0="144.46696"
-       inkscape:tile-x0="102.47204"
-       ry="5.4560719"
-       y="-104.62297"
-       x="406.0242"
-       height="47.892155"
-       width="48.443348"
-       id="use3871"
-       style="fill-opacity:1;stroke:#ffffff;stroke-width:6.00067807;stroke-opacity:1"
-       transform="matrix(0.7015256,0.71264426,-0.72739659,0.68621731,0,0)" />
-    <rect
-       style="fill-opacity:1;stroke:#ffffff;stroke-width:6;stroke-opacity:1"
-       id="rect3898"
-       width="89.977791"
-       height="88.884056"
-       x="216.3774"
-       y="307.20493"
-       ry="10.126039"
-       inkscape:tile-x0="102.47204"
-       inkscape:tile-y0="144.46696" />
-    <rect
-       style="fill-opacity:1;stroke:#ffffff;stroke-width:6;stroke-opacity:1"
-       id="rect3900"
-       width="89.977791"
-       height="88.884056"
-       x="313.41162"
-       y="308.01715"
-       ry="10.126039"
-       inkscape:tile-x0="102.47204"
-       inkscape:tile-y0="144.46696" />
+    <g
+       id="g3000"
+       transform="matrix(0.9651778,0,0,0.97313355,7.0270095,-101.81587)">
+      <rect
+         style="fill-opacity:1;stroke:#ffffff;stroke-width:10;stroke-opacity:1"
+         id="use3828"
+         width="89.977791"
+         height="88.884056"
+         x="100.49402"
+         y="210.87482"
+         ry="10.126039"
+         inkscape:tile-x0="102.47204"
+         inkscape:tile-y0="144.46696" />
+      <use
+         height="512"
+         width="512"
+         transform="translate(116.47655,4.5139161e-6)"
+         id="use2996"
+         xlink:href="#use3828"
+         y="0"
+         x="0" />
+      <use
+         height="512"
+         width="512"
+         transform="translate(116.47654,0)"
+         id="use2998"
+         xlink:href="#use2996"
+         y="0"
+         x="0" />
+    </g>
+    <use
+       x="0"
+       y="0"
+       xlink:href="#g3000"
+       id="use3005"
+       width="512"
+       height="512"
+       transform="translate(2.8041047e-8,109.35848)" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#use3005"
+       id="use3007"
+       width="512"
+       height="512"
+       transform="translate(0,109.35847)" />
   </g>
 </svg>

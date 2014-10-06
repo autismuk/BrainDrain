@@ -62,7 +62,7 @@ local EditButton = Framework:createClass("control.user.edit","control.abstract")
 
 function EditButton:draw(colour)
 	local img = display.newImage(self.m_group,"images/edit.png",0,0)
-	img.width = 30 img.height = 40
+	img.width = 50 img.height = 50
 end 
 
 --- ************************************************************************************************************************************************************************
