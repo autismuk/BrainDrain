@@ -65,6 +65,7 @@ function PieceManager:constructor(info)
 	self:tag("enterFrame,pieceManager")												-- tag self.
 	self.m_nextRequiredClick = 1 													-- index of next required click
 	self.m_lastRequiredClick = info.gridSize * info.gridSize 						-- last required click.
+	info.factory:delete()															-- we can now dispose of the used factory.
 end	
 
 --//	Tidy up

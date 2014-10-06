@@ -97,8 +97,6 @@ manager:start("editor") 																		-- and start.
 --]]
 --- ************************************************************************************************************************************************************************
 
--- implement actual code editor
--- lossy object count (creating factory every time)
 -- TEST/Code Read, remove document store first.
 -- testing
 
