@@ -91,7 +91,7 @@ local HighScoreSceneManager = Framework:createClass("scene.highscore","game.scen
 function HighScoreSceneManager:preOpen(manager,data,resources)
 	local scene = Framework:new("game.scene") 													-- new scene
 	scene.m_advertObject = scene:new("ads.admob",ApplicationDescription.admobIDs)				-- create a new advert object
-	local header = scene.m_advertObject:getHeight() 											-- get the advert object heigh
+	local header = scene.m_advertObject:getHeightAfterGap() 									-- get the advert object heigh
 	scene:new("scene.highscore.main",{ score = data.score or 0, difficulty = data.difficulty, space = header })				
 	return scene
 end 

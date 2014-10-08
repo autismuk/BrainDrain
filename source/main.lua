@@ -98,7 +98,6 @@ manager:start("title") 																			-- and start.
 --- ************************************************************************************************************************************************************************
 
 -- TEST/Code Read, remove document store first.
--- Icon lines need to be thicker.
 -- testing
 
 -- the superclass thing for decoration ???? - mixin still needs same ?

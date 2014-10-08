@@ -122,7 +122,7 @@ local SetupSceneManager = Framework:createClass("scene.setup","game.sceneManager
 function SetupSceneManager:preOpen(manager,data,resources)
 	local scene = Framework:new("game.scene") 													-- create a new scene
 	scene.m_advertObject = scene:new("ads.admob",ApplicationDescription.admobIDs)				-- create a new advert object
-	local header = scene.m_advertObject:getHeight() 											-- get the advert object heigh
+	local header = scene.m_advertObject:getHeightAfterGap() 									-- get the advert object heigh
 	scene:new("scene.setup.main",{ top = header, bottom = display.contentHeight * 0.85 }) 		-- set up the setup scene
 	scene:new("control.rightarrow", { x = 90, r = 1, g = 0.5, b = 0, 							-- add right arrow to go to game.
 													listener = self, message = "start" })

@@ -106,7 +106,7 @@ function PuzzleSceneManager:preOpen(manager,data,resources)
 	local scene = Framework:new("game.scene") 													-- create a new scene
 
 	scene.m_advertObject = scene:new("ads.admob",ApplicationDescription.admobIDs)				-- create a new advert object
-	data.headerSpace = scene.m_advertObject:getHeight() 										-- get the advert object height
+	data.headerSpace = scene.m_advertObject:getHeightAfterGap() 								-- get the advert object height
 	scene:new("scene.puzzle.scenebackground",data)												-- create the background objects.
 
 	scene:new("control.audio", { r = 0,g = 0, b = 1 })											-- add an audio control and a home button
