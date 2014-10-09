@@ -18,6 +18,7 @@ ApplicationDescription = { 																		-- application description.
     					ios = "ca-app-pub-8354094658055499/1749592813", 							
 						android = "ca-app-pub-8354094658055499/1609992011"
 					},
+	advertType = 	"banner",																	-- show banners.
 	showDebug = 	true 																		-- show debug info and adverts.
 }
 
@@ -96,9 +97,6 @@ manager:start("title") 																			-- and start.
 
 --]]
 --- ************************************************************************************************************************************************************************
-
--- TEST/Code Read, remove document store first.
--- testing
 
 -- the superclass thing for decoration ???? - mixin still needs same ?
 -- extended transition system.

@@ -96,7 +96,8 @@ function SetupScene:constructor(info)
 	self.m_selectors = {} 															-- array of selector objects
 
 	for i = 1,self.m_itemCount do 													-- for each control option
-		local y = (info.bottom - info.top) / (self.m_itemCount) * (i + 0.8) 		-- work out where it goes
+		local y = (info.bottom - info.top) / (self.m_itemCount) * (i - 0.5) 		-- work out where it goes
+		y = y + info.top + 8
 		local sel = SetupScene.selectors[i] 										-- reference its ssetup data
 		self.m_selectors[i] = Framework:new("scene.setup.selector", 				-- create a selector
 												{ y = y, name = sel.name, options = sel.options, default = sel.default, group = self.m_group })
